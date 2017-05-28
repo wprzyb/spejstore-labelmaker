@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'prawn'
+gem 'prawn-qrcode'
+gem 'prawn-svg'
+gem 'sinatra'
+gem 'color'
+gem 'excon'
+gem 'rmagick'
+gem 'json'
