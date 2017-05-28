@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'prawn'
-gem 'prawn-qrcode'
+gem 'prawn-qrcode', :git => 'https://github.com/jabbrwcky/prawn-qrcode', :ref => 'd492904'
 gem 'prawn-svg'
 gem 'sinatra'
 gem 'color'

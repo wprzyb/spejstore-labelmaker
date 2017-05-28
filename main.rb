@@ -21,7 +21,7 @@ module Excon
   end
 end
 
-BACKEND_URL = 'http://inventory.waw.hackerspace.pl/api/1/'
+BACKEND_URL = 'https://inventory.waw.hackerspace.pl/api/1/'
 CODE_PREFIX = "HTTP://I/"
 
 def api(uri)
@@ -52,12 +52,11 @@ def render_identicode(data, id, extent)
 end
 
 def render_label(label)
-  margin = 2
 
   label = api("labels/#{label}")
 
   pdf = Prawn::Document.new(page_size: [89, 36].map { |x| mm2pt(x) },
-                            margin: mm2pt(margin)) do
+                            margin: [2, 2, 2, 6].map { |x| mm2pt(x) }) do
     font_families.update("DejaVuSans" => {
       normal: "fonts/DejaVuSans.ttf",
       italic: "fonts/DejaVuSans-Oblique.ttf",
@@ -67,21 +66,23 @@ def render_label(label)
 
     font 'DejaVuSans'
 
-    svg IO.read("hsyrenka.svg"),
-      position: :right, vposition: :bottom,
-      height: 0.5*bounds.height
 
-    print_qr_code CODE_PREFIX + label['id'], stroke: false,
-      extent: mm2pt(36-2*margin), foreground_color: color,
-      pos: [bounds.left, bounds.top]
+    # Width of right side
+    rw = bounds.height/2
 
-    text_box label['item']['name'],
-      size: 30, align: :center, valign: :center,
-      inline_format: true,
-      width: bounds.width - bounds.height - 8,
-      height: bounds.height - 10,
-      at: [bounds.left+bounds.height, bounds.top - 5],
-      overflow: :shrink_to_fit
+    # Right side
+    bounding_box([bounds.right - rw, bounds.top], :width => rw) do
+      print_qr_code CODE_PREFIX + label['id'], stroke: false,
+        foreground_color: '000000',
+        extent: bounds.width, margin: 0, pos: bounds.top_left
+    end
+
+    # Left side
+    bounding_box(bounds.top_left, :width => bounds.width-rw) do
+      text_box label['item']['name'],
+        size: 30, align: :center, valign: :center,
+        inline_format: true, overflow: :shrink_to_fit
+    end
   end
 
   pdf.render

@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/jabbrwcky/prawn-qrcode
+  revision: d4929043950962f299cb16873fc500bc4682bbed
+  ref: d492904
+  specs:
+    prawn-qrcode (0.3.0)
+      prawn (>= 1)
+      rqrcode (>= 0.4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -13,9 +22,6 @@ GEM
     prawn (2.1.0)
       pdf-core (~> 0.6.1)
       ttfunk (~> 1.4.0)
-    prawn-qrcode (0.3.0)
-      prawn (>= 1)
-      rqrcode (>= 0.4.1)
     prawn-svg (0.26.0)
       css_parser (~> 1.3)
       prawn (>= 0.11.1, < 3)
@@ -41,7 +47,7 @@ DEPENDENCIES
   excon
   json
   prawn
-  prawn-qrcode
+  prawn-qrcode!
   prawn-svg
   rmagick
   sinatra
