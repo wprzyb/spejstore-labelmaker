@@ -21,7 +21,7 @@ module Excon
   end
 end
 
-BACKEND_URL = 'http://127.0.0.1:8000/api/1/'
+BACKEND_URL = 'http://inventory.waw.hackerspace.pl/api/1/'
 CODE_PREFIX = "HTTP://I/"
 
 def api(uri)
@@ -86,6 +86,8 @@ def render_label(label)
 
   pdf.render
 end
+
+set :bind, '0.0.0.0'
 
 get '/api/1/preview/:label.pdf' do
   headers["Content-Type"] = "application/pdf; charset=utf8"
