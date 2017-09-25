@@ -12,10 +12,26 @@ require 'zlib'
 
 include Prawn::Measurements
 
+module Prawn
+  module Text
+    module Formatted #:nodoc:
+      # @private
+      class LineWrap #:nodoc:
+        def whitespace()
+          # Wrap by these special characters as well
+          "&:/\\" +
+          "\s\t#{zero_width_space()}"
+        end
+      end
+    end
+  end
+end
+
+
 module Excon
   class Response
     def json!()
-      puts body
+      # Convenience function
       JSON.parse(body)
     end
   end
@@ -80,8 +96,8 @@ def render_label(label)
     # Left side
     bounding_box(bounds.top_left, :width => bounds.width-rw) do
       text_box label['item']['name'],
-        size: 30, align: :center, valign: :center,
-        inline_format: true, overflow: :shrink_to_fit
+        size: 40, align: :center, valign: :center, width: bounds.width-10,
+        inline_format: true, overflow: :shrink_to_fit, disable_wrap_by_char: true
     end
   end
 
