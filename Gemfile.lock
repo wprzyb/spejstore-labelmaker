@@ -1,11 +1,10 @@
 GIT
   remote: https://github.com/jabbrwcky/prawn-qrcode
-  revision: d4929043950962f299cb16873fc500bc4682bbed
-  ref: d492904
+  revision: 08e457af2d6661ede3346a3a3dc3b99a9df9fd9b
   specs:
-    prawn-qrcode (0.3.0)
+    prawn-qrcode (0.5.1)
       prawn (>= 1)
-      rqrcode (>= 0.4.1)
+      rqrcode (>= 1.0.0)
 
 GEM
   remote: https://rubygems.org/
